@@ -23,6 +23,17 @@ server.tool(
     }
 );
 
+server.tool(
+    "weather",
+    "福岡市の天気を返す",
+    {},
+    async ({}) => {
+        const response = await fetch("https://weather.tsukumijima.net/api/forecast/city/400010");
+        const data = await response.json();
+        return {content: [{type: "text", text: `福岡市の現在の天気は${data.forecasts[0].telop}です。${data.description.text}`}]}
+    }
+);
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);

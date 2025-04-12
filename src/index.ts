@@ -14,6 +14,15 @@ server.tool(
   ({num}) => ({content: [{type: "text", text: (num * 2).toString()}]}),
 );
 
+server.tool(
+    "secret_words",
+    "秘密の合言葉を返す",
+    {},
+    () => {
+        return {content: [{type: "text", text: `秘密の合言葉は"MCP勉強中"です`}]}
+    }
+);
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
